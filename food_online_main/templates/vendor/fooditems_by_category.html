@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+{% include 'includes/alerts.html' %}
+
+<!-- Main Section Start -->
+<div class="main-section">
+    {% include 'includes/cover.html' %}
+    <div class="page-section account-header buyer-logged-in">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <!-- Include Side Bar Start -->
+                    {% include 'includes/v_sidebar.html' %}
+                    <!-- Include Side Bar End -->
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <div class="user-dashboard loader-holder">
+                        <div class="user-holder">
+                            <h2 class="text-uppercase">Build Your Food Menu</h2>
+                            <hr>
+                            <a class="btn btn-info text-uppercase font-weight-bold" href="/vendor/menu-builder/"> BACK </a>
+                            <br><br>
+                            <h3>Categories : <span class="text-uppercase text-danger">{{ category }}</span></h3>
+
+                            
+                            {% if fooditems %}
+                                
+                       
+                                
+                            <table class="table table-borderless">
+                                <tbody>
+                                    {% for food in fooditems %}
+                                    <tr>
+                                        <td class="text-left">{{ forloop.counter }}</td>
+                                        <td class="text-left"><img src="{{ food.image.url }}" width="80"></td>
+                                        <td class="text-left">
+                                            <a href=""">
+                                                <p class="m-0 font-weight-bold" style="text-decoration: none;">{{ food }}</p>
+                                                <small class="text-muted">{{ food.description }}</small>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                            {% if food.is_available %}
+                                            <span class="badge badge-pill badge-success">Available</span>
+                                            {% else %}
+                                            <span class="badge badge-pill badge-danger">Not Available</span>
+                                            {% endif %}
+                                                
+                                            
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'edit_food' food.id %}" type="button" class="btn btn-primary text-uppercase font-weight-bold">Edit</a>
+                                            &nbsp;
+                                            <a href="{% url 'delete_food' food.id %}" onclick="return confirm('Are You Sure You Want To Delete This Food Item')" type="button" class="btn btn-danger text-uppercase font-weight-bold">Delete</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% else %}
+                            <h3 class="text-center"> No Food Items Found</h3>
+                            <div class="text-center"> 
+                                <a href="#" class="btn btn-success text-uppercase font-weight-bold m-3">Add Food</a>
+                            </div>
+
+
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main Section End -->
+
+{% endblock %}

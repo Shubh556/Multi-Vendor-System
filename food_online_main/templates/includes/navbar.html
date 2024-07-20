@@ -1,0 +1,60 @@
+<!--Main Wrapper-->
+{% load static %}
+<div class="wrapper">
+    <!-- Header Start -->
+    <header id="header">
+        <div class="main-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                        <div class="logo">
+                            <figure>
+                                <a href="{% url 'home' %}" class="light-logo">
+                                    <img src="{% static 'logo/foodOnlineLogo.png'%}" alt="FoodBakery" width="260" height="58">
+                                </a>
+                            </figure>
+                        </div>
+
+
+                       
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="login-option">
+                            {% if user.is_authenticated %}
+                            <a class="btn btn-info text-uppercase font-weight-bold mt-4 mr-2"   type="button"
+                            href="{% url 'cart' %}"> My Cart
+                            <span class="badge badge-pill badge-danger ml-1" id="cart_counter">{{cart_count}}</span></a>
+                            {% endif %}
+
+                            <a class="btn btn-warning text-uppercase font-weight-bold mt-4 mr-2"  type="button"
+                            href="{% url 'marketplace' %}">Marketplace</a>
+                            
+                            {% if user.is_authenticated %}
+                                
+                            <a class="btn btn-primary text-uppercase font-weight-bold mt-4 mr-2" type="button"
+                            href="{% url 'myAccount' %}">My Account</a>
+                        <div class="text-center">
+                            <a class="btn btn-danger text-uppercase font-weight-bold" style="margin-bottom: 2em; margin-top: 2em;" type="button"
+                            href="{% url 'logout' %}">LogOut</a>
+                        </div>
+                                {% else %}
+                            <a class="btn btn-danger text-uppercase font-weight-bold mt-4 mr-2"
+                            type="button" href="{% url 'login' %}">Login</a>
+
+
+                            <span><a href="{% url 'registerUser' %}" type="button"
+                                    class="btn btn-danger text-uppercase font-weight-bold mt-4">Register</a></span>
+
+                                    <div class="text-center">
+                            <a class="btn btn-danger text-uppercase font-weight-bold" style="margin-bottom: 2em; margin-top: 2em;" type="button" href="{% url 'registerVendor' %}"> Register Restaurant </a>
+                                    </div>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+<!-- Header End -->

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'includes/alerts.html' %}
+
+<!-- Main Section Start -->
+<div class="main-section">
+   {% include 'customers/cover.html' %}
+    <div class="page-section account-header buyer-logged-in">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                   <!-- Load Sidebar -->
+                   {% include 'includes/c_sidebar.html' %}
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <div class="user-dashboard loader-holder">
+                        <div class="user-holder">
+
+                            <div class="container mt-5">
+                                <div class="row">
+                                    <div class="col-md-8 offset-md-2">
+                                        <h1 class="mb-4">Order Confirmation</h1>
+                                        {% if order %}
+                                        <div class="card mb-4">
+                                            <div class="card-header">
+                                                <h3>Order Information</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <p><strong>Order Number:</strong> {{ order.order_number }}</p>
+                                                <p><strong>Name:</strong> {{ order.first_name }} {{ order.last_name }}</p>
+                                                <p><strong>Phone:</strong> {{ order.phone }}</p>
+                                                <p><strong>Email:</strong> {{ order.email }}</p>
+                                                <p><strong>Address:</strong> {{ order.address }}, {{ order.city }}, {{ order.state }}, {{ order.pin_code }}</p>
+                                                <p><strong>Amount Paid:</strong> {{ order.total }}</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Display Ordered Food Items -->
+                                        <div class="card mb-4">
+                                            <div class="card-header">
+                                                <h3>Ordered Food Items</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Food Title</th>
+                                                            <th>Quantity</th>
+                                                            <th>Price</th>
+                                                            <th>Amount</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for item in ordered_food_items %}
+                                                        <tr>
+                                                            <td>{{ item.fooditem.food_title }}</td>
+                                                            <td>{{ item.quantity }}</td>
+                                                            <td>{{ item.price }}</td>
+                                                            <td>{{ item.amount }}</td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        {% else %}
+                                        <div class="alert alert-info" role="alert">
+                                            No order found.
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main Section End -->
+{% endblock %}

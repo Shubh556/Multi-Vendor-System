@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml" lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" hs-webfonts="true" href="https://fonts.googleapis.com/css?family=Lato|Lato:i,b,bi">
+    <meta property="og:title" content="Email template">  
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        body {
+            width: 100%;
+            margin: auto;
+            padding: 0;
+            font-family: Lato, sans-serif;
+            font-size: 16px;
+            color: #33475B;
+            word-break: break-word;
+            background-color: #F5F8FA;
+        }
+        #email {
+            margin: auto;
+            width: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .content-table {
+            width: 100%;
+            padding: 30px;
+            background-color: #EAF0F6;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #33475B;
+        }
+        p {
+            margin: 5px 0;
+        }
+        .order-details p {
+            margin: 10px 0;
+        }
+        .order-summary {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .order-summary th, .order-summary td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .footer {
+            background-color: #C33332;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            border-radius: 0 0 8px 8px;
+        }
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div id="email">
+    <table class="content-table" role="presentation">
+        <tr>
+            <td>
+                <h2>You have recived a new order</h2>
+       
+            </td>
+        </tr>
+        <tr>
+            <td>Order number: {{ order.order_number }}</td>
+        </tr>
+    </table>
+
+    <!-- Ordered food table -->
+    <table class="content-table order-details" role="presentation">
+        <tr>
+            <td><p><strong>Customer Phone no:</strong> {{ order.phone }}</p></td>
+        </tr>
+        <tr>
+            <td><p><strong>Customer Email:</strong> {{ order.email }}</p></td>
+        </tr>
+        <tr>
+            <td><p><strong>Amount Paid:</strong> Yes </p></td>
+        </tr>
+    </table>
+
+    <!-- Order amounts -->
+    <table class="content-table order-summary" role="presentation">
+        <thead>
+            <tr>
+                <th>Food Title</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in ordered_food_to_vendor %}
+            <tr>
+                <td>{{ item.fooditem.food_title }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.amount }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p>© {% now "Y" %} FoodOnline Marketplace, All Rights Reserved.</p>
+        <a href="http://{{domain}}">Visit Website</a>
+    </div>
+</div>
+</body>
+</html>
