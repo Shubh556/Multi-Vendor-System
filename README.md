@@ -1,9 +1,3 @@
-
-# Project Title
-
-A brief description of what this project does and who it's for
-
-
 # Multi-Vendor Food Ordering System
 
 This Django-based web application enables multiple vendors to list food items for customers to order. The system provides a secure and user-friendly platform where customers can browse food items, manage their cart, and complete orders, while vendors can manage their food listings and view incoming orders. The application also features role-based access control, ensuring different permissions for customers, vendors, and administrators.
